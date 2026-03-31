@@ -1,0 +1,35 @@
+{% extends 'library/base.html' %}
+
+{% block content %}
+<div class="card">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+        <h2 style="margin: 0;">Library Catalog</h2>
+        <a href="{% url 'add_book' %}" class="btn">+ Add Book</a>
+    </div>
+    
+    {% if books %}
+        <table style="width: 100%; border-collapse: collapse; margin-top: 1rem;">
+            <thead>
+                <tr style="border-bottom: 2px solid var(--border); text-align: left;">
+                    <th style="padding: 0.75rem 0.5rem; font-weight: 600;">Title</th>
+                    <th style="padding: 0.75rem 0.5rem; font-weight: 600;">Author</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                <tr style="border-bottom: 1px solid var(--border);">
+                    <td style="padding: 1rem 0.5rem; color: var(--text-main); font-weight: 500;">{{ book.title }}</td>
+                    <td style="padding: 1rem 0.5rem; color: var(--text-muted);">{{ book.author_name }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div style="text-align: center; padding: 3rem 0; color: var(--text-muted);">
+            <svg style="width: 48px; height: 48px; margin: 0 auto; margin-bottom: 1rem; color: #9CA3AF;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+            <p style="font-size: 1.125rem;">No books in the library yet.</p>
+            <p style="font-size: 0.875rem; max-width: 300px; margin: 0 auto;">Click "Add Book" above to enter your first catalog item.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'library/base.html' %}
+
+{% block content %}
+<div class="card">
+    <h2>Add a New Book</h2>
+    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Enter the book's details below to save it to the database.</p>
+    
+    <form method="post">
+        {% csrf_token %}
+        
+        {% for field in form %}
+        <div class="form-group">
+            {{ field.label_tag }}
+            {{ field }}
+            {% if field.errors %}
+                <div style="color: #EF4444; font-size: 0.875rem; margin-top: 0.25rem;">
+                    {{ field.errors }}
+                </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+        
+        <div style="margin-top: 1.5rem;">
+            <button type="submit" class="btn">Save Book</button>
+            <a href="{% url 'list_books' %}" class="btn" style="background-color: #6B7280; margin-left: 0.5rem;">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
