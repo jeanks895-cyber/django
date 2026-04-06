@@ -1,0 +1,51 @@
+{% extends 'books/base.html' %}
+
+{% block content %}
+<div class="card" style="padding: 20px; border-radius: 12px; margin-bottom: 30px;">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h2 style="margin: 0; border: none; padding: 0;">Collection Overview</h2>
+        <a href="{% url 'book_create' %}" class="btn" id="btn-add-book">+ Add New Book</a>
+    </div>
+</div>
+
+<div class="book-list">
+    {% for book in page_obj %}
+        <div class="card book-item" style="transition: all 0.2s ease; padding: 25px;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <div>
+                    <h3 style="margin: 0 0 8px 0; font-size: 1.3rem; color: #fff;">{{ book.title }}</h3>
+                    <p style="margin: 0; color: var(--text-muted);">By <strong style="color: #cbd5e1;">{{ book.author }}</strong> &bull; Published {{ book.year }}</p>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <a href="{% url 'book_update' book.pk %}" class="btn btn-secondary" style="padding: 8px 16px;">Edit</a>
+                    <a href="{% url 'book_delete' book.pk %}" class="btn btn-danger" style="padding: 8px 16px;">Delete</a>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <div class="card text-center" style="text-align: center; padding: 40px;">
+            <p style="color: var(--text-muted); font-size: 1.1rem;">No books found in the library database. Start by adding one!</p>
+        </div>
+    {% endfor %}
+</div>
+
+{% if page_obj.has_other_pages %}
+<div class="pagination" style="display: flex; justify-content: center; gap: 15px; margin-top: 30px; align-items: center;">
+    {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-secondary">&laquo; Previous</a>
+    {% else %}
+        <span class="btn btn-secondary" style="opacity: 0.5; cursor: not-allowed;">&laquo; Previous</span>
+    {% endif %}
+
+    <span style="color: var(--text-muted); font-weight: 500;">
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+    </span>
+
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}" class="btn btn-secondary" id="btn-next-page">Next &raquo;</a>
+    {% else %}
+        <span class="btn btn-secondary" style="opacity: 0.5; cursor: not-allowed;">Next &raquo;</span>
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %}

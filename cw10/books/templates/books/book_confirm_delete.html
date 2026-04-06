@@ -1,0 +1,24 @@
+{% extends 'books/base.html' %}
+
+{% block content %}
+<div class="card" style="max-width: 500px; margin: 0 auto; text-align: center; border-color: rgba(239, 68, 68, 0.3);">
+    <div style="width: 60px; height: 60px; border-radius: 50%; background-color: rgba(239, 68, 68, 0.1); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--danger-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 6h18"></path>
+            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+        </svg>
+    </div>
+    
+    <h2 style="border: none; padding-bottom: 0;">Are you sure?</h2>
+    <p style="color: var(--text-muted); margin-bottom: 30px; font-size: 1.05rem;">
+        Do you really want to delete <strong>"{{ book.title }}"</strong>? This process cannot be undone.
+    </p>
+    
+    <form method="POST" style="display: flex; justify-content: center; gap: 15px;">
+        {% csrf_token %}
+        <a href="{% url 'book_list' %}" class="btn btn-secondary">Cancel</a>
+        <button type="submit" class="btn btn-danger">Yes, Delete Book</button>
+    </form>
+</div>
+{% endblock %}

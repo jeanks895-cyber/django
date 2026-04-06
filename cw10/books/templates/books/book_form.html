@@ -1,0 +1,35 @@
+{% extends 'books/base.html' %}
+
+{% block content %}
+<div class="card" style="max-width: 600px; margin: 0 auto;">
+    <h2>{% if form.instance.pk %}Edit Book{% else %}Add New Book{% endif %}</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        
+        <div style="display: flex; justify-content: flex-end; gap: 15px; margin-top: 30px;">
+            <a href="{% url 'book_list' %}" class="btn btn-secondary">Cancel</a>
+            <button type="submit" class="btn">Save Book</button>
+        </div>
+    </form>
+</div>
+<style>
+    /* Styling for Django automatically generated p tags for forms */
+    .card p {
+        margin-bottom: 20px;
+    }
+    .card p label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: var(--text-muted);
+    }
+    .errorlist {
+        color: var(--danger-color);
+        list-style: none;
+        padding: 0;
+        margin-top: 5px;
+        font-size: 0.85rem;
+    }
+</style>
+{% endblock %}
