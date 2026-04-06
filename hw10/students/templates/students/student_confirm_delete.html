@@ -1,0 +1,22 @@
+{% extends 'students/base.html' %}
+
+{% block title %}Delete Student{% endblock %}
+
+{% block content %}
+<div class="form-card delete-card">
+    <span class="delete-icon">⚠️</span>
+    <h1>Confirm Deletion</h1>
+    <p>Are you sure you want to delete <strong>{{ student.name }}</strong>?</p>
+    <div class="student-details">
+        <span>Class: {{ student.student_class }}</span>
+        <span>Age: {{ student.age }}</span>
+    </div>
+    <form method="POST" class="delete-form">
+        {% csrf_token %}
+        <div class="form-actions">
+            <button type="submit" class="btn btn-danger">Yes, Delete</button>
+            <a href="{% url 'student_list' %}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
