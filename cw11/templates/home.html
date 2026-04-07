@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - Visit Counter{% endblock %}
+
+{% block content %}
+<div class="card hero-card">
+    <h1 class="hero-title">
+        Track Your <span class="gradient-text">Visits</span>
+    </h1>
+    <p class="hero-description">
+        A simple and elegant visit counter. Sign up, log in, and see how many times you've visited the counter page. Each visit is tracked just for you.
+    </p>
+    <div class="hero-buttons">
+        {% if user.is_authenticated %}
+            <a href="{% url 'visit_counter' %}" class="btn btn-primary">Go to Counter</a>
+        {% else %}
+            <a href="{% url 'signup' %}" class="btn btn-primary">Get Started</a>
+            <a href="{% url 'login' %}" class="btn btn-secondary">Login</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

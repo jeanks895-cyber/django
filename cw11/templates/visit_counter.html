@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Visit Counter - {{ user.username }}{% endblock %}
+
+{% block content %}
+<div class="card counter-card">
+    <p class="counter-greeting">Hello, <strong>{{ user.username }}</strong>!</p>
+    <h1 class="card-title">Your Visit Counter</h1>
+
+    <div class="counter-display">
+        <div class="counter-ring">
+            <div class="counter-number">{{ count }}</div>
+        </div>
+        <p class="counter-label">Total Page Visits</p>
+    </div>
+
+    <p class="card-subtitle" style="margin-bottom: 0;">
+        Every time you visit this page, your counter goes up by one.
+        <br>Refresh the page to see it increase!
+    </p>
+</div>
+{% endblock %}
