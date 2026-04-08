@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome - Book Club</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2 class="welcome-message">Welcome, {{ user.username }}!</h2>
+        <p class="visit-count">You have visited this page {{ visit_count }} times in this session.</p>
+        <div class="logout-link">
+            <a href="{% url 'logout' %}">Logout</a>
+        </div>
+    </div>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
